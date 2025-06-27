@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="/css/mybooking.css"/>
+</head>
+<body>
+    <!-- Include header and pass user data -->
+    <%- include('partial/header') %>
+  <div class="section">
+    <h1>My Bookings</h1>
+    <% if (myBookings.length > 0) { %>
+      <ul class="booking">
+        <% myBookings.forEach(b => { %>
+          <li class="info">
+            <strong><%= b.date %> at <%= b.time %></strong>
+            <span class="status <%= b.status %>">
+              (<%= b.status.charAt(0).toUpperCase() + b.status.slice(1) %>)
+            </span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>You haven't booked yet</p>
+    <% } %>
+  </div>
+
+  <div class="section">
+    <h2>All Other Bookings</h2>
+    <% if (others.length > 0) { %>
+      <ul class="booking">
+        <% others.forEach(b => { %>
+          <li class="info">
+            <strong><%= b.email %></strong> booked <%= b.date %> at <%= b.time %>
+            <span class="status <%= b.status %>">
+              (<%= b.status.charAt(0).toUpperCase() + b.status.slice(1) %>)
+            </span>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No other bookings available</p>
+    <% } %>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pool Bookings - Admin</title>
+  <link rel="stylesheet" href="/css/adminStyles.css">
+  <style>
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #023e8a;
+    }
+
+    .booking-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .booking-table th,
+    .booking-table td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .booking-table thead {
+      background-color: #0077b6;
+      color: white;
+    }
+
+    .booking-table tbody tr:nth-child(even) {
+      background-color: #f1f5f9;
+    }
+
+    .status {
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .status.pending {
+      background-color: #ffecb3;
+      color: #b38f00;
+    }
+
+    .status.approved {
+      background-color: #d4edda;
+      color: #2e7d32;
+    }
+
+    .status.rejected {
+      background-color: #f8d7da;
+      color: #b71c1c;
+    }
+
+    .approve-btn,
+    .reject-btn {
+      padding: 0.4rem 0.8rem;
+      margin: 0 2px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .approve-btn {
+      background-color: #2e7d32;
+    }
+
+    .approve-btn:hover {
+      background-color: #1b5e20;
+    }
+
+    .reject-btn {
+      background-color: #c62828;
+    }
+
+    .reject-btn:hover {
+      background-color: #8e0000;
+    }
+
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+
+    /*Drop down*/
+    .status-dropdown {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.action-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background-color: #0077b6;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-btn:hover {
+  background-color: #023e8a;
+}
+
+/* Add missing CSS classes */
+.btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.accept-btn {
+  background-color: #2e7d32;
+}
+
+.accept-btn:hover {
+  background-color: #1b5e20;
+}
+
+.edit-btn {
+  background-color: #0077b6;
+  margin-right: 5px;
+}
+
+.edit-btn:hover {
+  background-color: #023e8a;
+}
+
+.delete-btn {
+  background-color: #c62828;
+}
+
+.delete-btn:hover {
+  background-color: #8e0000;
+}
+
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <img src="/img/logo.jpg" alt="Logo" style="height:40px; width:auto; vertical-align:middle; border-radius:8px; margin-right:8px;" />
+      Swimminng Pool
+    </div>
+    <ul class="nav-links">
+      <li><a href="/admin/dashboard">Dashboard</a></li>
+      <li><a href="/admin/view-swimming">View Activities</a></li>
+      <li><a href="/admin/pool-bookings" class="active">Pool Bookings</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <h1>Pool Booking Requests</h1>
+
+    <% if (bookings.length > 0) { %>
+      <table class="booking-table">
+        <thead>
+          <tr>
+            <th>User Email</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(b => { %>
+  <tr>
+    <td><%= b.email %></td>
+    <td><%= b.date %></td>
+    <td><%= b.time %></td>
+    <td><%= b.status %></td>
+    <td>
+      <% if (b.status === 'pending') { %>
+        <form action="/admin/accept-booking/<%= b.id %>" method="POST" style="display:inline;">
+          <button type="submit" class="btn accept-btn">Accept</button>
+        </form>
+      <% } else if (b.status === 'approved') { %>
+        <span style="color:green;">✔</span>
+      <% } else if (b.status === 'rejected') { %>
+        <span style="color:red;">✖</span>
+      <% } %>
+    </td>
+  </tr>
+<% }) %>
+                
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No bookings yet.</p>
+    <% } %>
+  </main>
+</body>
+</html>

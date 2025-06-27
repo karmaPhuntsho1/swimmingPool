@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - Swimming Pool</title>
+  <link rel="stylesheet" href="/css/adminStyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <img src="/img/logo.jpg" alt="Logo" style="height:40px; width:auto; vertical-align:middle; border-radius:8px; margin-right:8px;" />
+      <span class="logo"> </span> Swimming Pool
+    </div>
+    <ul class="nav-links">
+      <li><a href="/admin/dashboard">Dashboard</a></li>
+      <li><a href="/admin/view-swimming">View Activities</a></li>
+      <li><a href="/admin/pool-bookings" class="active">Pool Bookings</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <section class="welcome">
+      <h1>Welcome, Admin</h1>
+      <p>Manage swimming pool activities from this dashboard.</p>
+    </section>
+
+    <section class="form-section">
+      <h2>Add New Swimming Activity</h2>
+      <form action="/admin/add-swimming" method="POST" class="activity-form">
+        <div class="form-group">
+          <label for="name">Activity Name</label>
+          <input type="text" name="name" placeholder="e.g., Beginner Swim Class" required>
+        </div>
+        <div class="form-group">
+          <label for="coach">Coach Name</label>
+          <input type="text" name="coach" placeholder="e.g., Coach Dorji" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Price (Nu.)</label>
+          <input type="number" name="price" step="0.01" placeholder="e.g., 250.00" required>
+        </div>
+        <button type="submit" class="btn">Add Activity</button>
+      </form>
+    </section>
+
+    <section class="swimming-list">
+      <h2>Current Activities</h2>
+      <% if (activities.length > 0) { %>
+        <ul class="activity-list">
+          <% activities.forEach(activity => { %>
+            <li class="activity-item">
+              <strong><%= activity.name %></strong><br>
+              Coach: <%= activity.coach %> <br>
+              Price: Nu.<%= activity.price %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No activities added yet.</p>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

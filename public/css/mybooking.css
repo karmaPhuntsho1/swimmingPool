@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #023047;
+}
+
+h1, h2 {
+    color: #0077b6;
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.booking {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info {
+    margin-bottom: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: #e0f7fa;
+    border-left: 5px solid #0077b6;
+    border-radius: 5px;
+}
+
+.status {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.approved {
+    color: green;
+}
+
+.rejected {
+    color: red;
+}
+
+.pending {
+    color: orange;
+}
+
+.navbar {
+    background-color: #89cff0 !important;
+}

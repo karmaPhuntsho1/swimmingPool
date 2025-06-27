@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaBook - Swimming Pool Booking</title>
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+     <!-- Include header and pass user data -->
+    <%- include('partial/header') %>
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome, <%= user.email %></h1>
+            <!-- <h1>Dive into Your Perfect Swim</h1> -->
+            <a href="/user/booking" class="btn" style="margin-top: 20px;">Book Now</a>
+        </div>
+    </section>
+    
+    <section class="activities" style="display: flex; flex-direction: column; align-items: center;">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: #11223a;">Activities Available:</h2>
+        <% if (activities.length > 0) { %>
+            <div class="activities">
+            <% for (var i = 0; i < activities.length; i++) { %>
+                <div class="activity-card" id="activity-<%= activities[i].id %>">
+                <h3><%= activities[i].name %></h3>
+                <p>Coach: <%= activities[i].coach %></p>
+                <p>Price: Nu.<%= activities[i].price %></p>
+                <button onclick="markInterested('<%= activities[i].id %>')">Interested</button>
+                <button onclick="markNotInterested('<%= activities[i].id %>')">Not Interested</button>
+                </div>
+            <% } %>
+            </div>
+        <% } else { %>
+            <!-- No activities message removed -->
+        <% } %>
+        </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Why Choose Our Pool?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-tint"></i>
+                    <h3>Crystal Clear Water</h3>
+                    <p>Our advanced filtration system ensures the cleanest swimming experience</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-stopwatch"></i>
+                    <h3>Flexible Hours</h3>
+                    <p>Open from 6 AM to 10 PM to fit your schedule</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user-lock"></i>
+                    <h3>Safety First</h3>
+                    <p>Certified lifeguards on duty at all times</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>AquaBook</h3>
+                <p>Making swimming accessible and enjoyable for everyone</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> 17848271</p>
+                <p><i class="fas fa-envelope"></i> info@aquabook.com</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 AquaBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function markInterested(activityId) {
+            fetch(`/user/mark-interested/${activityId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => {
+                if (res.ok) {
+                alert('Thank you for your interest!');
+                // Optionally update the UI here or reload
+                location.reload();
+                } else {
+                alert('Failed to mark interested.');
+                }
+            })
+            .catch(() => alert('Error occurred.'));
+            }
+
+            function markNotInterested(activityId) {
+            fetch(`/user/mark-not-interested/${activityId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => {
+                if (res.ok) {
+                alert('Activity marked as not interested.');
+                // Optionally remove activity from the DOM or reload
+                location.reload();
+                } else {
+                alert('Failed to mark not interested.');
+                }
+            })
+            .catch(() => alert('Error occurred.'));
+            }
+    </script>
+</body>
+</html>
