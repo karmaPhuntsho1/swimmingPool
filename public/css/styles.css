@@ -1,6 +1,9 @@
 body { font-family: Arial, sans-serif; margin: 2em; }
 form { display: flex; flex-direction: column; width: 300px; }
-input, button { margin: .5em 0; padding: .5em; }
+input, button {
+  margin: .5em 0;
+  padding: .5em;
+}
 
 /*Verification Status*/
 .status {
