@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   background: #87ceeb;
   display: flex;
   align-items: center;
@@ -37,6 +37,12 @@ select {
   background: #fff;
   outline: none;
   transition: border-color 0.2s;
+  color: #999;
+}
+
+select option {
+  color: #999;
+  background: #fff;
 }
 
 input[type="text"]:focus,

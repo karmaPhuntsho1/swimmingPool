@@ -1,4 +1,4 @@
-body { font-family: Arial, sans-serif; margin: 2em; }
+body { font-family: 'Times New Roman', Times, serif; margin: 2em; }
 form { display: flex; flex-direction: column; width: 300px; }
 input, button {
   margin: .5em 0;
@@ -41,7 +41,7 @@ header .logo {
 
 nav ul {
   display: flex;
-  gap: 1.5rem;
+  gap: 0rem;
   list-style: none;
 }
 
@@ -50,6 +50,8 @@ nav ul li a {
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
+  font-size: 1.35rem;
+  padding: 0.5em 0.5em;
 }
 
 nav ul li a:hover {
